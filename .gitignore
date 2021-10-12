@@ -13,4 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/
+
+
+
 #token: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
