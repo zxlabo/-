@@ -8,7 +8,10 @@ https://github.com/chefyuan/algorithm-base?utm_source=gold_browser_extension
 https://github.com/doocs/leetcode
 
 LeetCode最热一百题
-1、两数之和
-  答案：https://github.com/chefyuan/algorithm-base/blob/main/animation-simulation/%E6%95%B0%E7%BB%84%E7%AF%87/leetcode1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.md
+1、题目《两数之和》
+    LeetCode：https://leetcode-cn.com/problems/two-sum/
+    答案：https://github.com/chefyuan/algorithm-base/blob/main/animation-simulation/%E6%95%B0%E7%BB%84%E7%AF%87/leetcode1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.md
+
 2、两数相加
-  答案：https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0002.Add%20Two%20Numbers/README.md
+    LeetCode：https://leetcode-cn.com/problems/add-two-numbers/
+    答案：https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0002.Add%20Two%20Numbers/README.md
