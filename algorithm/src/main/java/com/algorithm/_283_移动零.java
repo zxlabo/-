@@ -20,7 +20,7 @@ public class _283_移动零 {
         for (int i=0;i<arrays.length;i++){
             System.out.print(arrays[i] + ",");
         }
-        moveZero(arrays);
+        moveZeroes(arrays);
         System.out.println("移动后");
         for (int i=0;i<arrays.length;i++){
             System.out.print(arrays[i] + ",");
@@ -32,18 +32,22 @@ public class _283_移动零 {
      * 2、创建变量zeroIndex,标识左边第一个0的索引。
      * 3、当碰到非0元素的时候，和零元素交换位置。
      */
-    private static void moveZero(int[] arrays) {
-        if (arrays.length == 0) return;
-        for (int i = 0, cur = 0; i < arrays.length ; i++) {
-            if (arrays[i] == 0) {
-                continue;
-            }
-            if (cur != i) {
-                arrays[cur] = arrays[i];
-                arrays[i] = 0;
-            }
-            cur++;
+    public static void moveZeroes(int[] nums) {
+        if(nums==null ||nums.length==1){
+            return;
         }
-    }
+        // 当数不为0，就和前面的0交换位置
+        int zeroIndex=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0){
+                if(nums[zeroIndex]==0){
+                    nums[zeroIndex]=nums[i];
+                    nums[i]=0;
+                }
+                zeroIndex++;
+            }
 
+        }
+
+    }
 }
