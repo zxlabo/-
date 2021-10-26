@@ -16,6 +16,10 @@ LeetCode最热一百题
     LeetCode：https://leetcode-cn.com/problems/add-two-numbers/
     答案：https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0002.Add%20Two%20Numbers/README.md
 
-3、无重复字符的最长子串
+3、移动零
+    LeetCode：https://leetcode-cn.com/problems/move-zeroes/
+    答案：https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0283.Move%20Zeroes/README.md
+
+❌、无重复字符的最长子串
     LeetCode：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
     答案：https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0003.Longest%20Substring%20Without%20Repeating%20Characters/README.md

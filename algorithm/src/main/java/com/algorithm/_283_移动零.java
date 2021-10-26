@@ -13,7 +13,7 @@ package com.algorithm;
  * 必须在原数组上操作，不能拷贝额外的数组。
  * 尽量减少操作次数。
  */
-public class 移动零 {
+public class _283_移动零 {
 
     public static void main(String[] args) {
         int[] arrays = new int[]{1, 10, 2, 0, 3, 5, 0, 6, 9};
