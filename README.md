@@ -10,15 +10,15 @@ https://github.com/doocs/leetcode
 LeetCode最热一百题
 1、题目《两数之和》
     LeetCode：https://leetcode-cn.com/problems/two-sum/
-    答案：https://github.com/chefyuan/algorithm-base/blob/main/animation-simulation/%E6%95%B0%E7%BB%84%E7%AF%87/leetcode1%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.md
 
 2、两数相加
     LeetCode：https://leetcode-cn.com/problems/add-two-numbers/
-    答案：https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0002.Add%20Two%20Numbers/README.md
 
 3、移动零
     LeetCode：https://leetcode-cn.com/problems/move-zeroes/
-    答案：https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0283.Move%20Zeroes/README.md
+
+4、合并两个有序数组
+    LeetCode：https://leetcode-cn.com/problems/merge-sorted-array/
 
 ❌、无重复字符的最长子串
     LeetCode：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
