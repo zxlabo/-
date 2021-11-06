@@ -19,12 +19,11 @@ public class _2_两数相加 {
         ListNode l2 = AlgorithmUtils.stringToListNode("[5,6,4]");
         ListNode l3 = addTwoNumbers(l1, l2);
         System.out.println("--------------begin--------------");
-        while (l3 != null) {
-            System.out.println(l3.val);
-            l3 = l3.next;
-        }
+        AlgorithmUtils.nodeToString(l3);
         System.out.println("--------------end--------------");
     }
+
+
 
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {

@@ -48,4 +48,11 @@ public class AlgorithmUtils {
     public static String integerArrayToString(int[] nums) {
         return integerArrayToString(nums, nums.length);
     }
+    public static void nodeToString(ListNode l3) {
+        while (l3 != null) {
+            System.out.print(l3.val+",");
+            l3 = l3.next;
+        }
+        System.out.println("");
+    }
 }
