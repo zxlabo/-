@@ -3,36 +3,33 @@ package com.排序算法;
 import java.util.Arrays;
 
 public class _插入排序 {
-    /**
-     * 将数组分成已排好序和未排好序的区间，前面是已排好序的，后面是未排好序的。
-     * 取未排好序的第一个value，然后和已排好序的最后一个开始比较。
-     * 当value比当前数值大的时候，
-     */
+
     public static void main(String[] args) {
-        int[] array = new int[10];
-        for (int i = 0; i < 10; i++) {
-            array[i] = (int) (Math.random() * 100);
-        }
-        System.out.println(Arrays.toString(array));
+        int[] array = {79, 80, 94, 43, 79, 40};
+        System.out.println("排序前"+Arrays.toString(array));
         insertSort(array);
-        System.out.println(Arrays.toString(array));
-
+        System.out.println("排序后"+Arrays.toString(array));
     }
-
-    private static void insertSort(int[] array) {
-        for (int i = 1; i < array.length; i++) {
-            //未排好序的前一个，就是已排好序的。
+    /**
+     * 将数组分为已排序和未排序，将未排序的第一个，从已排序的末尾开始比较，选择合适的位置插入。
+     */
+    private static void insertSort(int[] array){
+        //表示未排好序的
+        for (int i=1;i<array.length;i++){
             int value = array[i];
-            int j = i - 1;
-            for (; j >= 0; j--) {
-                if (value > array[j]) {
-
-                    break;
-                } else {
+            int j=i-1;
+            for (;j>=0;j--){
+                //如果value比当前数小，那么当前数要后移一位。否则将value插入到当前数的后面。
+                if (value<array[j]){
                     array[j + 1] = array[j];
+                }else{
+                    break;
                 }
             }
-            array[j + 1] = value;
+            array[j+1]=value;
         }
     }
+
+
+
 }

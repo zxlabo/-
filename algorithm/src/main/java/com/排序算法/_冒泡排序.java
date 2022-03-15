@@ -3,45 +3,30 @@ package com.排序算法;
 import java.util.Arrays;
 
 public class _冒泡排序 {
+    /**
+     * 从头开始依次比较相邻两个元素，经过一轮比较，最大元素排到了末尾。
+     */
     public static void main(String[] args) {
-        int[] array = new int[10];
-        for (int i = 0; i < 10; i++) {
-            array[i] = (int) (Math.random() * 100);
-        }
+        int[] array = {79, 80, 94, 43, 40};
         System.out.println(Arrays.toString(array));
-        bubbleSort2(array);
+        bubbleSort(array);
         System.out.println(Arrays.toString(array));
 
     }
 
-    private static void bubbleSort(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j);
+    private static void bubbleSort(int[] nums) {
+        //1、外层循环控制循环的次数
+        for (int i = 0; i < nums.length; i++) {
+            //2、内层循环控制 两个数依次进行比较
+            for (int j = 0; j < nums.length - 1 - i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    int temp = nums[j + 1];
+                    nums[j + 1] = nums[j];
+                    nums[j] = temp;
                 }
             }
         }
     }
 
-    private static void bubbleSort2(int[] array) {
-        //外层循环表示，已经排好序的
-        for (int i = array.length-1; i > 0; i--) {
-            int sorted=1;
-            for (int j = 0; j < i; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(array, j);
-                    sorted=j+1;
-                }
-            }
-            i=sorted;
-        }
-    }
-
-    private static void swap(int[] array, int j) {
-        int temp = array[j];
-        array[j] = array[j + 1];
-        array[j + 1] = temp;
-    }
 
 }

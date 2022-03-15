@@ -3,31 +3,29 @@ package com.排序算法;
 import java.util.Arrays;
 
 public class _选择排序 {
-    /**
-     * 分成已排序和未排序，后面是已排好序的。
-     * 从未排序数组中找到最大数，和未排序最后位置进行交换
-     */
+
     public static void main(String[] args) {
-        int[] array = new int[10];
-        for (int i = 0; i < 10; i++) {
-            array[i] = (int) (Math.random() * 100);
-        }
+        int[] array = {79, 80, 94, 43, 40};
         System.out.println(Arrays.toString(array));
         selectSort(array);
         System.out.println(Arrays.toString(array));
     }
 
+    /**
+     * 将数组分为未排好序和已排好序，从未排好序的选择最大的数，和最后面一个交换位置
+     */
     private static void selectSort(int[] array) {
-        for (int i = array.length - 1; i > 0; i--) {
-            int maxIdx = 0;
-            for (int j = 1; j <= i; j++) {
-                if (array[j] > array[maxIdx]) {
-                    maxIdx = j;
+        for (int i=0;i<array.length;i++){
+            int maxIndex=0;
+            for(int j=1;j<array.length-i;j++){
+                if (array[j]>array[maxIndex]){
+                    maxIndex=j;
                 }
             }
-            int temp = array[maxIdx];
-            array[maxIdx] = array[i];
-            array[i] = temp;
+            int temp = array[maxIndex];
+            array[maxIndex]=array[array.length-1-i];
+            array[array.length - 1 - i] = temp;
         }
     }
+
 }
