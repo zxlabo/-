@@ -1,4 +1,4 @@
-package com.数据结构;
+package com.数据结构.二叉搜索树;
 
 /**
  * 二叉搜索树应该具备的api

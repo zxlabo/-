@@ -1,6 +1,9 @@
 package com.数据结构.二叉搜索树;
 
-import com.数据结构.IBinarySearchTree;
+import com.数据结构.二叉搜索树.printer.BinaryTreeInfo;
+import com.数据结构.二叉搜索树.printer.BinaryTrees;
+
+import java.util.Comparator;
 
 /**
  * 二叉搜索树，英文简称为 BST
@@ -19,8 +22,61 @@ import com.数据结构.IBinarySearchTree;
  * 1）创建根节点root
  * 2）判断root是否为null，如果为null，那么添加的节点为root。else
  * 3）如果比当前节点小，那么往左边查找。如果比当前节点大，那么往右边查找。
+ * 4、设计Comparator
+ * <p>
+ * 打印二叉树
  */
-public class BinarySearchTree<E> implements IBinarySearchTree<E> {
+public class BinarySearchTree<E> implements IBinarySearchTree<E>, BinaryTreeInfo {
+
+    public static void main(String[] args) {
+        /**
+         * 打印二叉搜索树
+         *   ┌──7──┐
+         *   │     │
+         * ┌─4─┐ ┌─9─┐
+         * │   │ │   │
+         * 2─┐ 5 8   11
+         *   │
+         *   3
+         */
+        int[] array = new int[]{7, 4, 9, 2, 5, 8, 11, 3};
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i : array) {
+            bst.add(i);
+        }
+        //添加 1和12
+        bst.add(1);
+        bst.add(2);
+        BinaryTrees.print(bst);
+    }
+
+    /**
+     * 实现BinaryTreeInfo接口，实现打印二叉树功能
+     * 打印--begin
+     */
+    @Override
+    public Object root() {
+        return root;
+    }
+
+    @Override
+    public Object left(Object node) {
+        return ((TreeNode) node).left;
+    }
+
+    @Override
+    public Object right(Object node) {
+        return ((TreeNode) node).right;
+    }
+
+    @Override
+    public Object string(Object node) {
+        return ((TreeNode) node).element;
+    }
+    /**
+     * 实现BinaryTreeInfo接口，实现打印二叉树功能
+     * 打印--end
+     */
 
     /**
      * 二叉搜索树的大小
@@ -30,8 +86,25 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E> {
     /**
      * 根节点
      */
-    private Tree root;
+    private TreeNode root;
+    private Comparator<E> comparator;
 
+    public BinarySearchTree() {
+    }
+
+    public BinarySearchTree(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
+
+    /**
+     * 设计Comparator
+     */
+    private int compare(E e1, E e2) {
+        if (comparator!=null){
+           return comparator.compare(e1, e2);
+        }
+        return ((Comparable) e1).compareTo(e2);
+    }
 
     @Override
     public int size() {
@@ -54,12 +127,12 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E> {
             return;
         }
         if (root == null) {
-            root = new Tree<E>(element, null);
+            root = new TreeNode<E>(element, null);
             size++;
             return;
         }
-        Tree<E> parent = root;
-        Tree<E> node = root;
+        TreeNode<E> parent = root;
+        TreeNode<E> node = root;
         int cmp = 0;
         while (node != null) {
             cmp = compare(element, node.element);
@@ -75,12 +148,12 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E> {
             }
         }
         //此时，已经查到要插入节点的父节点了。
-        Tree insertNode = new Tree<E>(element, parent);
+        TreeNode insertNode = new TreeNode<E>(element, parent);
         if (cmp > 0) {
             //插入的节点大于当前节点，右子树
-            parent.right=insertNode;
-        }else {
-            parent.left=insertNode;
+            parent.right = insertNode;
+        } else {
+            parent.left = insertNode;
         }
         size++;
     }
@@ -95,21 +168,19 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E> {
         return false;
     }
 
-    private int compare(E e1, E e2) {
-        int result = (Integer) e1 - (Integer) e2;
-        return result;
-    }
+
+
 
     /**
      * 创建树节点
      */
-    private static class Tree<E> {
+    private static class TreeNode<E> {
         E element;
-        Tree<E> left;
-        Tree<E> right;
-        Tree<E> parent;
+        TreeNode<E> left;
+        TreeNode<E> right;
+        TreeNode<E> parent;
 
-        public Tree(E e, Tree p) {
+        public TreeNode(E e, TreeNode p) {
             this.element = e;
             this.parent = p;
         }
