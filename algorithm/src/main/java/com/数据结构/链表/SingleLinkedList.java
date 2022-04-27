@@ -4,6 +4,7 @@ import com.数据结构.list.abs.AbstractList;
 
 /**
  * desc：单向链表
+ *
  * @param <E>
  */
 public class SingleLinkedList<E> extends AbstractList<E> {
@@ -33,6 +34,7 @@ public class SingleLinkedList<E> extends AbstractList<E> {
     }
 
     /**
+     * 给index位置设置数据
      * 时间复杂度：最好：O(1)、最坏：O(n)、平均：O(n)
      */
     @Override
@@ -134,7 +136,9 @@ public class SingleLinkedList<E> extends AbstractList<E> {
      *
      * @param <E>
      */
+
     private static class Node<E> {
+
         E element;
         Node<E> next;
 
@@ -142,6 +146,7 @@ public class SingleLinkedList<E> extends AbstractList<E> {
             this.element = element;
             this.next = next;
         }
+
     }
 
 }

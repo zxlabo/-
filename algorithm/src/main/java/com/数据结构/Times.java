@@ -3,7 +3,7 @@ package com.数据结构;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Times {
+public class Times  {
 	private static final SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss.SSS");
 	
 	public interface Task {

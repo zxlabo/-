@@ -157,10 +157,13 @@ public class BinaryTree<E> {
 		return new Node<>(element, parent);
 	}
 
+	/**
+	 * 前驱结点：中序遍历时，当前节点的前一个节点；
+	 * 如果是二叉搜索树，也就是前一个比他小的节点；
+	 */
 	protected Node<E> predecessor(Node<E> node) {
 		if (node == null) return null;
-		
-		// 前驱节点在左子树当中（left.right.right.right....）
+		//case1:node.left!= null，那么前驱节点在左子树当中（left.right.right.right....）
 		Node<E> p = node.left;
 		if (p != null) {
 			while (p.right != null) {
@@ -168,21 +171,28 @@ public class BinaryTree<E> {
 			}
 			return p;
 		}
-		
-		// 从父节点、祖父节点中寻找前驱节点
+		/**
+		 * case2：从父节点or祖父节点中找前驱结点，前驱节点要满足：当前节点要在前驱结点的右子树中。（因为前驱节点要小于当前节点）
+		 * 		  如果不满足，那么前驱结点就是null；
+		 * 也就是：此时node满足的条件是：node.parent == null 或者 node == node.parent.right。
+		 */
+		//只要不满足上述条件，node就一直寻找parent。
 		while (node.parent != null && node == node.parent.left) {
 			node = node.parent;
 		}
-
-		// node.parent == null
-		// node == node.parent.right
+		// 此时node.parent 有两种情况：
+		// 1、node.parent == null
+		// 2、node == node.parent.right
 		return node.parent;
 	}
-	
+
+	/**
+	 * 后继节点：中序遍历的时候，当前节点的下一个结点。
+	 * 如果是二叉搜索树，也就是后一个比他大的节点；
+	 */
 	protected Node<E> successor(Node<E> node) {
 		if (node == null) return null;
-		
-		// 前驱节点在左子树当中（right.left.left.left....）
+		//case1：node.right！=null，当前节点有右子树，那么后继节点在：(right.left.left.left....），终止条件：left为null；
 		Node<E> p = node.right;
 		if (p != null) {
 			while (p.left != null) {
@@ -190,12 +200,18 @@ public class BinaryTree<E> {
 			}
 			return p;
 		}
-		
-		// 从父节点、祖父节点中寻找前驱节点
+		/**
+		 * case2：从父节点、祖父节点中寻找后继节点。后继节点要满足：当前节点要在后继节点的左子树中，因为后继节点要大于当前节点；
+		 * 		如果不满足，那么后继节点就为null；
+		 * 	也就是：此时node满足的条件是：node.parent == null 或者 node == node.parent.left。
+		 */
+		//只要不满足上述条件，node就一直寻找parent。
 		while (node.parent != null && node == node.parent.right) {
 			node = node.parent;
 		}
-
+		// 此时node.parent 有两种情况：
+		// 1、node.parent == null
+		// 2、node == node.parent.left
 		return node.parent;
 	}
 

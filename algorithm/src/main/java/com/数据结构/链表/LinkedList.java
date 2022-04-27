@@ -49,8 +49,12 @@ public class LinkedList<E> extends AbstractList<E> {
 
     /**
      * 在索引index处添加元素
-     * 1、原先index处的元素变为新元素的next节点；
-     * 2、原先index处的元素的前驱结点变为新元素的前驱结点；
+     * 1、有两种情况，一是往最后面添加元素、二是其他位置
+     * 2、往最后面添加元素的时候，可能index==size==0，此时头节点，也是尾结点；
+     * 3、获取当前索引的node，这个node将变为新节点的next；
+     * 4、获取当前节点的prev，此时将变为新节点的prev；
+     * 5、创建新节点，传入prev、element、next；
+     * 6、更新next的前驱结点、更新prev的next节点。（注意prev可能为null，意味着first）
      */
     @Override
     public void add(int index, E element) {
@@ -70,7 +74,7 @@ public class LinkedList<E> extends AbstractList<E> {
                 oldLast.next = last;
             }
         } else {
-            //获取新节点的next：当前索引的节点为新节点的next；
+            //获取index索引的node节点，此时这个node将变为新节点的next；
             Node<E> next = node(index);
             //获取新节点的prev：当前索引的节点的前驱结点为新节点的prev；
             Node<E> prev = next.prev;

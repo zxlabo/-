@@ -3,8 +3,9 @@ package com.数据结构.tree;
 import java.util.Comparator;
 
 /**
- * AVL树
- * @param <E>
+ * 平衡二叉搜索树之——AVL树
+ * AVLTree是基于二叉搜索树的
+ * 当添加完节点or移除节点之后，对AVLTree进行恢复平衡操作；
  */
 public class AVLTree<E> extends BST<E> {
 	public AVLTree() {
@@ -17,14 +18,15 @@ public class AVLTree<E> extends BST<E> {
 
 	/**
 	 * 当添加完节点之后，会调用afterAdd方法，
-	 * 对二叉树进行更新高度或恢复平衡的操作。
+	 * 对二叉树进行更新高度、恢复平衡的操作。
 	 * @param node 新添加的节点
 	 */
 	@Override
 	protected void afterAdd(Node<E> node) {
 		/**
-		 * 开启while循环，从插入的节点开始，依次往上查找它的父节点，
-		 * 一直到找到新增节点node最近的失衡节点。
+		 * 开启while循环，从插入的节点开始，依次往上查找它的父节点
+		 * 如果没有失衡，就更新当前节点的高度
+		 * 如果失衡，将此节点恢复平衡。然后跳出循环；
 		 */
 		while ((node = node.parent) != null) {
 			//判断当前节点是否平衡，也就是左子树和右子树高度差<=1；
@@ -35,7 +37,7 @@ public class AVLTree<E> extends BST<E> {
 				/**
 				 * 此时，当前节点，就是距离新增节点最近的失衡节点
 				 * 我们调用 reBalance 方法，将此节点恢复平衡。
-				 *此节点恢复平衡之后，当前子树的高度并没有因为新增节点而变化，
+				 * 此节点恢复平衡之后，当前子树的高度并没有因为新增节点而变化，
 				 * 所以此时可以跳出循环，不需要再更新父节点的高度。
 				 */
 				reBalance(node);
@@ -43,7 +45,11 @@ public class AVLTree<E> extends BST<E> {
 			}
 		}
 	}
-	
+
+	/**
+	 *
+	 * @param node 被删除的节点 或者 用以取代被删除节点的子节点（当被删除节点的度为1）
+	 */
 	@Override
 	protected void afterRemove(Node<E> node) {
 		while ((node = node.parent) != null) {
@@ -64,30 +70,32 @@ public class AVLTree<E> extends BST<E> {
 
 	/**
 	 * 恢复平衡
-	 * grand 是高度最低的那个失衡节点，我们只需要将 以grand 为根节点的二叉树恢复平衡，
-	 * 那么整颗二叉树就会恢复平衡。
+	 * grand 是高度最低的那个失衡节点，我们需要将以 grand 为根节点的二叉树恢复平衡，
 	 * 1、找到 grand 左右子树最高的那颗树，记为 parent；
 	 * 2、找到 parent 左右子树最高的那棵树，记为 node；
 	 * 3、然后判断从 grand 到 node 的方向是什么
 	 *  如果是LL,就将grand右旋；LR:先将parent左旋，然后再将grand右旋；
 	 *  如果是RL:先将parent右旋，然后将grand左旋；RR:将grand左旋。
-	 * 4、此时恢复二叉树平衡。
+	 * 4、此时以 grand 为根节点的二叉树恢复平衡，
 	 */
 	private void reBalance(Node<E> grand) {
+		//1、找到 grand 左右子树最高的那颗树，记为 parent；
 		Node<E> parent = ((AVLNode<E>)grand).tallerChild();
+		//2、找到 parent 左右子树最高的那棵树，记为 node；
 		Node<E> node = ((AVLNode<E>)parent).tallerChild();
+		//3、然后判断从 grand 到 node 的方向是什么
 		if (parent.isLeftChild()) { // L
-			if (node.isLeftChild()) { // LL
+			if (node.isLeftChild()) { // LL:就将grand右旋
 				rotateRight(grand);
-			} else { // LR
+			} else { // LR 先将parent左旋，然后再将grand右旋；
 				rotateLeft(parent);
 				rotateRight(grand);
 			}
 		} else { // R
-			if (node.isLeftChild()) { // RL
+			if (node.isLeftChild()) { // RL 先将parent右旋，然后将grand左旋
 				rotateRight(parent);
 				rotateLeft(grand);
-			} else { // RR
+			} else { // RR 将grand左旋。
 				rotateLeft(grand);
 			}
 		}
@@ -152,7 +160,11 @@ public class AVLTree<E> extends BST<E> {
 		f.parent = d;
 		updateHeight(d);
 	}
-	
+
+	/**
+	 * 左旋
+	 * @param grand
+	 */
 	private void rotateLeft(Node<E> grand) {
 		Node<E> parent = grand.right;
 		Node<E> child = parent.left;
@@ -160,7 +172,11 @@ public class AVLTree<E> extends BST<E> {
 		parent.left = grand;
 		afterRotate(grand, parent, child);
 	}
-	
+
+	/**
+	 * 右旋
+	 * @param grand
+	 */
 	private void rotateRight(Node<E> grand) {
 		Node<E> parent = grand.left;
 		Node<E> child = parent.right;
@@ -168,7 +184,11 @@ public class AVLTree<E> extends BST<E> {
 		parent.right = grand;
 		afterRotate(grand, parent, child);
 	}
-	
+
+	/**
+	 * 旋转之后，要维护grand、parent、child的parent属性
+	 * 并更新grand、parent的高度
+	 */
 	private void afterRotate(Node<E> grand, Node<E> parent, Node<E> child) {
 		// 让parent称为子树的根节点
 		parent.parent = grand.parent;
@@ -179,15 +199,12 @@ public class AVLTree<E> extends BST<E> {
 		} else { // grand是root节点
 			root = parent;
 		}
-		
 		// 更新child的parent
 		if (child != null) {
 			child.parent = grand;
 		}
-		
 		// 更新grand的parent
 		grand.parent = parent;
-		
 		// 更新高度
 		updateHeight(grand);
 		updateHeight(parent);
@@ -200,20 +217,31 @@ public class AVLTree<E> extends BST<E> {
 	private void updateHeight(Node<E> node) {
 		((AVLNode<E>)node).updateHeight();
 	}
-	
+
+	/**
+	 * AVLNode
+	 * @param <E>
+	 */
 	private static class AVLNode<E> extends Node<E> {
 		int height = 1;
 		
 		public AVLNode(E element, Node<E> parent) {
 			super(element, parent);
 		}
-		
+
+		/**
+		 * 获取平衡因子=左子树高度-右子树高度
+		 * @return
+		 */
 		public int balanceFactor() {
 			int leftHeight = left == null ? 0 : ((AVLNode<E>)left).height;
 			int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
 			return leftHeight - rightHeight;
 		}
-		
+
+		/**
+		 * 更新树的高度=左子树、右子树高度的最大值+1；
+		 */
 		public void updateHeight() {
 			int leftHeight = left == null ? 0 : ((AVLNode<E>)left).height;
 			int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
@@ -242,4 +270,5 @@ public class AVLTree<E> extends BST<E> {
 			return element + "_p(" + parentString + ")_h(" + height + ")";
 		}
 	}
+
 }

@@ -3,7 +3,8 @@ package com.数据结构.tree;
 import java.util.Comparator;
 
 /**
- *
+ * 平衡二叉搜索树
+ * balance binary search tree
  * @param <E>
  */
 public class BBST<E> extends BST<E> {
@@ -41,12 +42,10 @@ public class BBST<E> extends BST<E> {
 		} else { // grand是root节点
 			root = parent;
 		}
-		
 		// 更新child的parent
 		if (child != null) {
 			child.parent = grand;
 		}
-		
 		// 更新grand的parent
 		grand.parent = parent;
 	}
@@ -84,4 +83,5 @@ public class BBST<E> extends BST<E> {
 		b.parent = d;
 		f.parent = d;
 	}
+
 }

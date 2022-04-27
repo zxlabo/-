@@ -50,6 +50,7 @@ public class CircleLinkedList<E> extends AbstractList<E> {
         current = current.next;
         return current.element;
     }
+
     @Override
     public void clear() {
         size = 0;
