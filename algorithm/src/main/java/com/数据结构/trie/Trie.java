@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class Trie<V> {
 	private int size;
+
 	private Node<V> root;
 	
 	public int size() {
@@ -33,6 +34,9 @@ public class Trie<V> {
 		return node != null && node.word;
 	}
 
+	/**
+	 * 添加数据
+	 */
 	public V add(String key, V value) {
 		keyCheck(key);
 		// 创建根节点
@@ -65,6 +69,9 @@ public class Trie<V> {
 		return null;
 	}
 
+	/**
+	 * 通过key删除节点
+	 */
 	public V remove(String key) {
 		// 找到最后一个节点
 		Node<V> node = node(key);
@@ -72,14 +79,12 @@ public class Trie<V> {
 		if (node == null || !node.word) return null;
 		size--;
 		V oldValue = node.value;
-		
 		// 如果还有子节点
 		if (node.children != null && !node.children.isEmpty()) {
 			node.word = false;
 			node.value = null;
 			return oldValue;
 		}
-		
 		// 如果没有子节点
 		Node<V> parent = null;
 		while ((parent = node.parent) != null) {
@@ -87,7 +92,6 @@ public class Trie<V> {
 			if (parent.word || !parent.children.isEmpty()) break;
 			node = parent;
 		}
-		
 		return oldValue;
 	}
 
@@ -96,17 +100,22 @@ public class Trie<V> {
 	}
 
 	/**
+	 * 通过key，获取node节点；
 	 * 比如 key：hello，value：2次
 	 * @param key
 	 * @return
 	 */
 	private Node<V> node(String key) {
+		//1、进行安全判断
 		keyCheck(key);
+		//2、从根节点开始进行查找
 		Node<V> node = root;
 		int len = key.length();
 		for (int i = 0; i < len; i++) {
 			if (node == null || node.children == null || node.children.isEmpty()) return null;
-			char c = key.charAt(i); 
+			//获取当前的字符
+			char c = key.charAt(i);
+			//通过map来获取node
 			node = node.children.get(c);
 		}
 		return node;
@@ -117,17 +126,15 @@ public class Trie<V> {
 			throw new IllegalArgumentException("key must not be empty");
 		}
 	}
-	
+
 	private static class Node<V> {
-		/**
-		 * 父节点
-		 */
+		//父节点
 		Node<V> parent;
-		/**
-		 * 一个节点，会有多个分支。用map存储
-		 */
+		//一个节点，会有多个分支。用map存储
 		HashMap<Character, Node<V>> children;
+		//当前节点的字符
 		Character character;
+		//当前节点对应的value
 		V value;
 		boolean word; // 是否为单词的结尾（是否为一个完整的单词）
 		public Node(Node<V> parent) {
