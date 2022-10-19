@@ -12,17 +12,31 @@ class _01_链表必会 {
     public static void main(String[] args) {
 
     }
+
     /**
      * 快慢指针求中间节点
      */
-    private ListNode findMidNode(ListNode node){
-        ListNode slow=node;
-        ListNode fast=node;
-        while(fast!=null&&fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+    private ListNode findMidNode(ListNode node) {
+        ListNode slow = node;
+        ListNode fast = node;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         return slow;
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode firstNode = new ListNode(0);
+        ListNode temp = firstNode;
+        while (head != null) {
+            if (head.val != val) {
+                temp.next = new ListNode(head.val);
+                temp = temp.next;
+            }
+            head = head.next;
+        }
+        return firstNode.next;
     }
 
     /**

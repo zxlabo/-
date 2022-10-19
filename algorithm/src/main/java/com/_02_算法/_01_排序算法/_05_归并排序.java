@@ -1,12 +1,12 @@
 package com._02_算法._01_排序算法;
 
 /**
- * 使用递归：
- * 1、不断的将当前序列平均分割成2个子序列，直到序列中元素数量为1；
- * 2、不断的将2个子序列合并成一个有序序列，直到合并成一个序列。
- * 时间复杂度o(nLogn)，空间复杂度 O(n)；
- * 归并排序的空间复杂度是 O( n/2 + logn )= O(n),n/2 用于临时存放左侧数组，logn 是因为递归调用
- * 是稳定排序，不是原地排序。
+  归并排序，使用递归
+  1、不断的将当前数组平均切割成2个子序列，直到不能切割，也就是只剩一个元素；
+  切割完之后
+  2、不断的将两个子序列合并成一个有序数组，直到只剩下一个数组
+  时间复杂度o(nLogn)，空间复杂度 O(n)；是稳定排序，不是原地排序。
+  空间复杂度是 O( n/2 + logn )= O(n),n/2 用于临时存放左侧数组，logn 是因为递归调用
  */
 @SuppressWarnings("unchecked")
 public class _05_归并排序<T extends Comparable<T>> extends Sort<T> {
@@ -32,7 +32,6 @@ public class _05_归并排序<T extends Comparable<T>> extends Sort<T> {
      */
     private void sort(int begin, int end) {
         if (end - begin < 2) return;
-
         int mid = (begin + end) >> 1;
         sort(begin, mid);
         sort(mid, end);
@@ -47,11 +46,10 @@ public class _05_归并排序<T extends Comparable<T>> extends Sort<T> {
         int ri = mid, re = end;
         int ai = begin;
 
-        // 备份左边数组
+        // 备份左边数组，因为左边的数组会被覆盖。
         for (int i = li; i < le; i++) {
             leftArray[i] = array[begin + i];
         }
-
         // 如果左边还没有结束
         while (li < le) {
             if (ri < re && cmp(array[ri], leftArray[li]) < 0) {

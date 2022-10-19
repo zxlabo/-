@@ -1,10 +1,14 @@
 package com;
 
-import java.awt.Point;
-import java.util.Deque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Vector;
 
 /**
  * author : Naruto
@@ -21,30 +25,68 @@ class _0_每日必看 {
         // 快慢指针
         // 整数反转
         // 找逆序对
+//        _0_每日必看 test = new _0_每日必看();
+//        test.listDelete();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("11");
+        list.add("11");
+        list.add("11");
+        list.add("11");
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.add("11");
+        list.removeAll(list2);
+        System.out.println(list);
+
+    }
+
+    private void listDelete() {
+
+    }
+
+    /**
+     * 数组必会
+     */
+    private void arrayStudy() {
+        /**
+         *
+         */
+        //1、数组的创建
+        int[] arr1 = new int[3];
+        int[] arr2 = new int[]{1, 2, 3};
+        int[] arr3 = {1, 2, 3};
+        int[][] arr4 = new int[3][2];
+        int[][] arr5 = new int[][]{{1, 2}, {3, 4}};
+        int[][] arr6 = {{1, 2}, {3, 4}};
+        //2、整数反转
+        //3、找逆序对
+        Integer[] arr7 = new Integer[3];
+        Arrays.sort(arr7, (o1, o2) -> o1-o2);
+        Arrays.sort(arr7,(o1,o2)->o1-o2);
+
     }
 
     /**
      * 队列必会
      */
-    private void queueStudy(){
-        Queue<Integer> queue=new LinkedList();
+    private void queueStudy() {
+        Queue<Integer> queue = new LinkedList();
         queue.offer(1);
         queue.poll();
         queue.peek();
-        boolean empty=queue.isEmpty();
-        int size=queue.size();
+        boolean empty = queue.isEmpty();
+        int size = queue.size();
     }
 
     /**
      * 栈必会
      */
-    private void stackStudy(){
-        Stack<Integer> stack=new Stack();
+    private void stackStudy() {
+        Stack<Integer> stack = new Stack();
         stack.push(1);
         stack.pop();
         stack.peek();
-        boolean empty=stack.isEmpty();
-        int size=stack.size();
+        boolean empty = stack.isEmpty();
+        int size = stack.size();
     }
 
     /**
@@ -62,12 +104,12 @@ class _0_每日必看 {
     /**
      * 快慢指针求中间节点
      */
-    private ListNode findMidNode(ListNode node){
-        ListNode slow=node;
-        ListNode fast=node;
-        while(fast!=null&&fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+    private ListNode findMidNode(ListNode node) {
+        ListNode slow = node;
+        ListNode fast = node;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         return slow;
     }
@@ -85,6 +127,7 @@ class _0_每日必看 {
         }
         return reverseNode;
     }
+
     /**
      * 1、整数反转
      * 考点：
@@ -134,7 +177,7 @@ class _0_每日必看 {
                 left = i;
             }
         }
-        return new int[]{left,right};
+        return new int[]{left, right};
     }
 
 

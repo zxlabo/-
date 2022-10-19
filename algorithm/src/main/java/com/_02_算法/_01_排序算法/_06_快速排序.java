@@ -14,7 +14,6 @@ public class _06_快速排序<T extends Comparable<T>> extends Sort<T> {
 	 */
 	private void sort(int begin, int end) { 
 		if (end - begin < 2) return;
-		
 		// 确定轴点位置 O(n)
 		int mid = pivotIndex(begin, end);
 		// 对子序列进行快速排序
@@ -27,9 +26,6 @@ public class _06_快速排序<T extends Comparable<T>> extends Sort<T> {
 	 * @return 轴点元素的最终位置
 	 */
 	private int pivotIndex(int begin, int end) {
-		// 随机选择一个元素跟begin位置进行交换
-		swap(begin, begin + (int)(Math.random() * (end - begin)));
-		
 		// 备份begin位置的元素
 		T pivot = array[begin];
 		// end指向最后一个元素
@@ -59,4 +55,5 @@ public class _06_快速排序<T extends Comparable<T>> extends Sort<T> {
 		// 返回轴点元素的位置
 		return begin;
 	}
+
 }

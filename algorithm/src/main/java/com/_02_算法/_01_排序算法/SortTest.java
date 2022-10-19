@@ -12,13 +12,13 @@ public class SortTest {
         Integer[] array = {79, 80, 94, 43, 79, 40, 40, 40, 40};
         System.out.println("原始数组"+Arrays.toString(array));
         testSorts(array,
-                new _01_冒泡排序(),
+//                new _01_冒泡排序(),
 //				new _09_基数排序()
 //				new _04_插入排序(),
 //				new InsertionSort2(),
 //				new InsertionSort3(),
-				new _02_选择排序()
-//                ,new _03_堆排序()
+//				new _02_选择排序(),
+                new _03_堆排序()
 //				new _05_归并排序(),
 //				new _01_冒泡排序(),
 //				new _06_快速排序(),

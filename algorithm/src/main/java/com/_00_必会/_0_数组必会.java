@@ -1,6 +1,8 @@
 package com._00_必会;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * author : Naruto
@@ -16,10 +18,28 @@ class _0_数组必会 {
         //2、逆序对[3,9]
         int[] res = test.subSort(new int[]{1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19});
         System.out.println(Arrays.toString(res));
+        HashSet<Integer> set2=new HashSet();
+
     }
 
+
     /**
-     * 1、整数反转
+     * 1、数组的创建
+     */
+    private void arrayStudy() {
+        int[] arr1 = new int[3];
+        int[] arr2 = new int[]{1, 2, 3};
+        int[] arr3 = {1, 2, 3};
+        int[][] arr4 = new int[3][2];
+        int[][] arr5 = new int[][]{{1, 2}, {3, 4}};
+        int[][] arr6 = {{1, 2}, {3, 4}};
+        //数组大小
+        int len = arr1.length;
+    }
+
+
+    /**
+     * 2、整数反转
      * 考点：
      * 1、整数反转
      * 2、数组越界
@@ -40,7 +60,7 @@ class _0_数组必会 {
     }
 
     /**
-     * 2、找逆序对
+     * 3、找逆序对
      */
     public int[] subSort(int[] array) {
         //1、边界判断
@@ -67,7 +87,7 @@ class _0_数组必会 {
                 left = i;
             }
         }
-        return new int[]{left,right};
+        return new int[]{left, right};
     }
 
 }
